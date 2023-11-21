@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Episode from './pages/Episode'
 import Location from './pages/Location'
 import Navbar from './components/Navbar'
+import Detail from './pages/Detailpage'
 
 
 /**
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
             {
                 path:'/location',
                 element:<Location />
+            },
+            {
+                path:'/:id',
+                element:<Detail />
             }
         ]
     }
