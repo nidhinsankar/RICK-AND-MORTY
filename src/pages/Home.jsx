@@ -5,7 +5,7 @@ import { CHARACTER_API_URL } from "../utils/constant"
 import Card from "../components/Card"
 import { filterList } from "../utils/filter"
 import Pagination from "../components/Pagination"
-
+import ShimmerCard from "../components/ShimmerCard"
 
 const Home = () => {
 
@@ -40,18 +40,6 @@ const Home = () => {
         return () => clearTimeout(timer)
     },[searchValue,pageNumber,status,species,gender])
 
-    const debounce = (func,timeOut =300) =>{
-        console.log('debounce fired');
-        let timer;
-        return (...args) => {
-            clearTimeout(timer)
-            timer = setTimeout(() => {
-                console.log('firing after 300ms');
-                func.apply(this,args)
-            }, timeOut);
-        } 
-
-    }
 
     return (
         <div>
@@ -81,7 +69,14 @@ const Character = ({characters}) => {
 
     console.log('charac =>',characters);
 
-    if(!characters) return null
+    if (!characters) return (
+        <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 md:gap-3 lg:grid-cols-3 ">
+            {[...Array(10).keys()].map(card => (
+                <ShimmerCard />
+            ))}
+            <h3>Helo</h3>
+        </div>
+    )
 
     return (
         <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 md:gap-3 lg:grid-cols-3 ">

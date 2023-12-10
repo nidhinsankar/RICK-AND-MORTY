@@ -62,6 +62,15 @@ const ListOfLocation = ({residents}) => {
 
     console.log('locations =',residents);
 
+    if (!residents) return (
+        <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 md:gap-3 lg:grid-cols-3 ">
+            {[...Array(10).keys()].map(card => (
+                <ShimmerCard />
+            ))}
+            <h3>Helo</h3>
+        </div>
+    )
+
     return (
         <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 md:gap-3 lg:grid-cols-3 lg:ml-3">
             {residents?.map(resident => (
