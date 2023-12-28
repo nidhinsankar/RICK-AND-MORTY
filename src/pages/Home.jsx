@@ -69,7 +69,7 @@ const Character = ({characters}) => {
 
     console.log('charac =>',characters);
 
-    if (!characters) return (
+    if (characters.length === 0) return (
         <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 md:gap-3 lg:grid-cols-3 ">
             {[...Array(10).keys()].map(card => (
                 <ShimmerCard />
