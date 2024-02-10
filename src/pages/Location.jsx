@@ -6,53 +6,36 @@ import { filterList } from "../utils/filter";
 import SearchBar from "../components/SearchBar";
 import DropDown from "../components/Dropdown";
 import ShimmerCard from "../components/ShimmerCard";
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "../store/store";
+import { fetchLocation } from "../store/locationApiSlice";
 
 const Location = () => {
-  const [locationInfo, setLocationInfo] = useState({});
   const [locationNumber, setLocationNumber] = useState(1);
-  const [residents, setResidents] = useState([]);
-  const [filteredList, setFilteredList] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
-
-  const onChange = (e) => {
-    setSearchValue(e.target.value);
-  };
-
-  const onClickFilter = () => {
-    const list = filterList(residents, searchValue);
-    setFilteredList(list);
-  };
+  const state = useSelector((state) => state.location?.location);
+  const loading = useSelector((state) => state.location?.loading);
+  const error = useSelector((state) => state.location?.error);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    async function fetchData() {
-      const data = await fetch(LOCATION_API_URL + locationNumber).then((res) =>
-        res.json()
-      );
-      // console.log(data);
-      setLocationInfo(data);
+    dispatch(fetchLocation({ locationNumber }));
+  }, []);
 
-      let list = await Promise.all(
-        data?.residents?.map((x) => fetch(x).then((res) => res.json()))
-      );
-
-      setResidents(list);
-      setFilteredList(list);
-      // console.log('list',list);
-    }
-    fetchData();
-  }, [locationNumber]);
-
+  if (error) {
+    return <div>{error}</div>;
+  }
+  console.log(state);
   return (
     <>
       <div className="flex flex-col justify-center items-center gap-y-3 my-3">
         <h2 className="font-bold text-xl md:text-4xl">
           Location Name :{" "}
-          <span className="text-blue-600">{locationInfo?.name}</span>
+          <span className="text-blue-600">{state?.info?.name}</span>
         </h2>
         <p className="text-xl md:text-2xl">
-          Dimension: {locationInfo?.dimension}
+          Dimension: {state?.info?.dimension}
         </p>
-        <p className="text-xl md:text-2xl">Type: {locationInfo?.type}</p>
+        <p className="text-xl md:text-2xl">Type: {state?.info?.type}</p>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-4 w-[90%] lg:w-[70%] mx-auto">
         <DropDown
@@ -60,16 +43,16 @@ const Location = () => {
           name={"location"}
           updateNumber={setLocationNumber}
         />
-        <ListOfLocation residents={filteredList} />
+        <ListOfLocation residents={state?.AllCharacter} loading={loading} />
       </div>
     </>
   );
 };
 
-const ListOfLocation = ({ residents }) => {
+const ListOfLocation = ({ residents, loading }) => {
   console.log("locations =", residents);
 
-  if (residents?.length === 0)
+  if (loading)
     return (
       <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 md:gap-3 lg:grid-cols-3 ">
         {[...Array(10).keys()].map((card) => (
@@ -96,3 +79,22 @@ const ListOfLocation = ({ residents }) => {
 };
 
 export default Location;
+
+// useEffect(() => {
+//   async function fetchData() {
+//     const data = await fetch(LOCATION_API_URL + locationNumber).then((res) =>
+//       res.json()
+//     );
+//     // console.log(data);
+//     setLocationInfo(data);
+
+//     let list = await Promise.all(
+//       data?.residents?.map((x) => fetch(x).then((res) => res.json()))
+//     );
+
+//     setResidents(list);
+//     setFilteredList(list);
+//     // console.log('list',list);
+//   }
+//   fetchData();
+// }, [locationNumber]);

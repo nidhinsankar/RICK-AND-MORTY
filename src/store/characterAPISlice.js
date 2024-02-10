@@ -3,9 +3,12 @@ import { CHARACTER_API_URL } from "../utils/constant";
 
 export const fetchCharacter = createAsyncThunk(
   "fetch/characters",
-  async (_, thunkApi) => {
+  async ({ pageNumber, searchValue, status, gender, species }, thunkApi) => {
     try {
-      const res = await fetch(CHARACTER_API_URL);
+      const res = await fetch(
+        CHARACTER_API_URL +
+          `?page=${pageNumber}&name=${searchValue}&status=${status}&gender=${gender}&species=${species}`
+      );
       const data = await res.json();
       return data;
     } catch (error) {
@@ -18,7 +21,7 @@ const characterApiSlice = createSlice({
   name: "characters",
   initialState: {
     loading: false,
-    characters: [],
+    characters: {},
     error: null,
   },
   reducers: {},
