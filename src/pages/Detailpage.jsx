@@ -6,7 +6,6 @@ import { fetchSingleCharacter } from "../store/singleCharacterApiSlice";
 
 const Detail = ({}) => {
   const { id } = useParams();
-  const [characterInfo, setCharacterInfo] = useState();
   const dispatch = useAppDispatch();
   const state = useSelector((state) => state.singleCharacter);
 

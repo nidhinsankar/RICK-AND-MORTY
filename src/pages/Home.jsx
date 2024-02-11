@@ -36,8 +36,6 @@ const Home = () => {
     return <div>{fetchError}</div>;
   }
 
-  console.log(characterState);
-
   return (
     <div>
       <SearchBar searchValue={searchValue} onChange={onChange} />

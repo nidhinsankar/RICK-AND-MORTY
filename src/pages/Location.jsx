@@ -24,7 +24,6 @@ const Location = () => {
   if (error) {
     return <div>{error}</div>;
   }
-  console.log(state);
   return (
     <>
       <div className="flex flex-col justify-center items-center gap-y-3 my-3">
@@ -50,8 +49,6 @@ const Location = () => {
 };
 
 const ListOfLocation = ({ residents, loading }) => {
-  console.log("locations =", residents);
-
   if (loading)
     return (
       <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 md:gap-3 lg:grid-cols-3 ">
