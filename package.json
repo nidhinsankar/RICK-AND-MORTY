@@ -2,7 +2,8 @@
   "name": "rick-and-morty",
   "version": "1.0.0",
   "description": "rick and morty character wiki web app using react",
-  "main": "app.js",
+  "homepage": ".",
+  "source": "index.html",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html"
