@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import reactDOM from "react-dom/client";
-import { RICK_MORTY_API_URL } from "./utils/constant";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import Episode from "./pages/Episode";
@@ -52,5 +51,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-const root = reactDOM.createRoot(document.getElementById("root"));
+const root = reactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
 root.render(<RouterProvider router={router} />);

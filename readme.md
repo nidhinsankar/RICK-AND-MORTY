@@ -4,6 +4,7 @@
 
 - PARCEL
 - TAILWINDCSS
+- TYPESCRIPT
 - REACT-PAGINATE
 - REDUXJS/TOOLKIT
 - REACT-ROUTER-DOM
@@ -22,4 +23,5 @@
 
 ## to learn
 
-- i need to use rtk query to full extent
+- I need to use rtk query to full extent
+- Adding typescript to a existing react project using parcel bundler

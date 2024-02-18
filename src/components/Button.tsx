@@ -1,4 +1,18 @@
-const Button = ({ name, task, setPageNumber, current }) => {
+import React from "react";
+
+interface ButtonProps {
+  name: string;
+  task: any;
+  setPageNumber: any;
+  current: any;
+}
+
+const Button: React.FC<ButtonProps> = ({
+  name,
+  task,
+  setPageNumber,
+  current,
+}) => {
   console.log(current);
   console.log(name);
   return (

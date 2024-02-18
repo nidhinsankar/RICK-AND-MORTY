@@ -1,6 +1,14 @@
+import React from "react";
 import { Link } from "react-router-dom";
 
-const Card = ({ name, image, status, location, id }) => {
+interface CardProps {
+  name: any;
+  image: any;
+  status: any;
+  location: any;
+  id: any;
+}
+const Card: React.FC<CardProps> = ({ name, image, status, location, id }) => {
   return (
     <div
       className="relative my-2 shadow-2xl hover:shadow-lg flex flex-col content-end w-[100%] rounded-lg card"
