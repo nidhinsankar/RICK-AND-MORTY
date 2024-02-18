@@ -61,8 +61,6 @@ const Home = () => {
 };
 
 const Character = ({ characters, loading }) => {
-  console.log("charac =>", characters);
-
   if (loading)
     return (
       <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 md:gap-3 lg:grid-cols-3 ">

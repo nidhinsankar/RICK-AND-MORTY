@@ -19,7 +19,7 @@ const Episode = () => {
 
   useEffect(() => {
     dispatch(fetchEpisode({ episodeNumber }));
-  }, []);
+  }, [episodeNumber]);
 
   if (error) {
     return <div>{error}</div>;

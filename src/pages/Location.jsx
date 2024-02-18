@@ -19,7 +19,7 @@ const Location = () => {
 
   useEffect(() => {
     dispatch(fetchLocation({ locationNumber }));
-  }, []);
+  }, [locationNumber]);
 
   if (error) {
     return <div>{error}</div>;
@@ -76,22 +76,3 @@ const ListOfLocation = ({ residents, loading }) => {
 };
 
 export default Location;
-
-// useEffect(() => {
-//   async function fetchData() {
-//     const data = await fetch(LOCATION_API_URL + locationNumber).then((res) =>
-//       res.json()
-//     );
-//     // console.log(data);
-//     setLocationInfo(data);
-
-//     let list = await Promise.all(
-//       data?.residents?.map((x) => fetch(x).then((res) => res.json()))
-//     );
-
-//     setResidents(list);
-//     setFilteredList(list);
-//     // console.log('list',list);
-//   }
-//   fetchData();
-// }, [locationNumber]);
