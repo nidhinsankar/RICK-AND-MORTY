@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { CHARACTER_API_URL } from "../utils/constant";
+import { Character } from "../types/type";
 
-export const fetchSingleCharacter = createAsyncThunk(
+export const fetchSingleCharacter = createAsyncThunk<Character, { id: number }>(
   "fetch/singleCharacter",
   async ({ id }, thunkAPI) => {
     try {
@@ -14,13 +15,22 @@ export const fetchSingleCharacter = createAsyncThunk(
   }
 );
 
+interface StateType {
+  loading: boolean;
+  singleCharacter: object;
+  error: null | string;
+}
+
+const initialState: StateType = {
+  loading: false,
+  singleCharacter: {},
+  error: null,
+};
+
 const singleCharacterApiSlice = createSlice({
   name: "singleCharacterAPI",
-  initialState: {
-    loading: false,
-    singleCharacter: {},
-    error: null,
-  },
+  initialState: initialState,
+  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(fetchSingleCharacter.pending, (state) => {
@@ -32,7 +42,7 @@ const singleCharacterApiSlice = createSlice({
       })
       .addCase(fetchSingleCharacter.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || "problem with data fetching";
+        state.error = action.error.message || "problem with data fetching";
       });
   },
 });

@@ -1,7 +1,26 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { CHARACTER_API_URL } from "../utils/constant";
+import { Character } from "../types/type";
 
-export const fetchCharacter = createAsyncThunk(
+interface CharacterResult {
+  info: {
+    count: number;
+    pages: number;
+    next: null | string;
+    prev: null | string;
+  };
+  results: Character[];
+}
+
+interface ParameterType {
+  pageNumber: number;
+  searchValue: string;
+  status: string;
+  gender: string;
+  species: string;
+}
+
+export const fetchCharacter = createAsyncThunk<CharacterResult, ParameterType>(
   "fetch/characters",
   async ({ pageNumber, searchValue, status, gender, species }, thunkApi) => {
     try {
@@ -17,13 +36,20 @@ export const fetchCharacter = createAsyncThunk(
   }
 );
 
+interface InitialStateType {
+  loading: boolean;
+  characters: object;
+  error: null | string;
+}
+
+const initialState: InitialStateType = {
+  loading: false,
+  characters: {},
+  error: null,
+};
 const characterApiSlice = createSlice({
   name: "characters",
-  initialState: {
-    loading: false,
-    characters: {},
-    error: null,
-  },
+  initialState,
   reducers: {},
   extraReducers(builder) {
     builder
