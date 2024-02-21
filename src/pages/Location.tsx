@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { LOCATION_API_URL } from "../utils/constant";
 import Filter from "../components/Filter";
 import Card from "../components/Card";
@@ -7,15 +7,18 @@ import SearchBar from "../components/SearchBar";
 import DropDown from "../components/Dropdown";
 import ShimmerCard from "../components/ShimmerCard";
 import { useSelector } from "react-redux";
-import { useAppDispatch } from "../store/store";
+import { rootState, useAppDispatch } from "../store/store";
 import { fetchLocation } from "../store/locationApiSlice";
+import { LocationListProps } from "../types/type";
 
 const Location = () => {
   const [locationNumber, setLocationNumber] = useState(1);
-  const state = useSelector((state) => state.location?.location);
-  const loading = useSelector((state) => state.location?.loading);
-  const error = useSelector((state) => state.location?.error);
+  const state = useSelector((state: rootState) => state.location?.location);
+  const loading = useSelector((state: rootState) => state.location?.loading);
+  const error = useSelector((state: rootState) => state.location?.error);
   const dispatch = useAppDispatch();
+
+  console.log("state", state);
 
   useEffect(() => {
     dispatch(fetchLocation({ locationNumber }));
@@ -48,7 +51,10 @@ const Location = () => {
   );
 };
 
-const ListOfLocation = ({ residents, loading }) => {
+const ListOfLocation: React.FC<LocationListProps> = ({
+  residents,
+  loading,
+}) => {
   if (loading)
     return (
       <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 md:gap-3 lg:grid-cols-3 ">

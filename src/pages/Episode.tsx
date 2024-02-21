@@ -6,15 +6,16 @@ import { filterList } from "../utils/filter";
 import SearchBar from "../components/SearchBar";
 import DropDown from "../components/Dropdown";
 import { useSelector } from "react-redux";
-import { useAppDispatch } from "../store/store";
+import { rootState, useAppDispatch } from "../store/store";
 import { fetchEpisode } from "../store/episodeApiSLice";
 import ShimmerCard from "../components/ShimmerCard";
+import { EpisodeListProps } from "../types/type";
 
 const Episode = () => {
   const [episodeNumber, setEpisodeNumber] = useState(1);
-  const state = useSelector((state) => state.episode?.episodes);
-  const loading = useSelector((state) => state.episode?.loading);
-  const error = useSelector((state) => state.episodes?.error);
+  const state = useSelector((state: rootState) => state.episode?.episodes);
+  const loading = useSelector((state: rootState) => state.episode?.loading);
+  const error = useSelector((state: rootState) => state.episode?.error);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -42,7 +43,7 @@ const Episode = () => {
   );
 };
 
-const ListOfEpisode = ({ characters, loading }) => {
+const ListOfEpisode = ({ characters, loading }: EpisodeListProps) => {
   if (loading)
     return (
       <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 md:gap-3 lg:grid-cols-3 ">
@@ -70,22 +71,3 @@ const ListOfEpisode = ({ characters, loading }) => {
 };
 
 export default Episode;
-
-// useEffect(()=>{
-//     async function fetchData() {
-//         const datas = await fetch(EPISODE_API_URL + episodeNumber)
-//         const data = await datas.json()
-//         setEpisodeInfo(data)
-
-//         let list = await Promise.all(
-//             data?.characters?.map(x => fetch(x).then(res => res.json()))
-//         )
-//         setCharacters(list)
-//         setFilteredList(list)
-//     }
-//     fetchData()
-// },[episodeNumber])
-
-// console.log(episodeInfo);
-
-// console.log(filteredList);

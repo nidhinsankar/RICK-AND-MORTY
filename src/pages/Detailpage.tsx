@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useAppDispatch } from "../store/store";
+import { rootState, useAppDispatch } from "../store/store";
 import { useSelector } from "react-redux";
 import { fetchSingleCharacter } from "../store/singleCharacterApiSlice";
 
 const Detail = ({}) => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const state = useSelector((state) => state.singleCharacter);
+  const state = useSelector((state: rootState) => state.singleCharacter);
 
   useEffect(() => {
     dispatch(fetchSingleCharacter({ id }));
@@ -64,15 +64,3 @@ const Detail = ({}) => {
 };
 
 export default Detail;
-
-// const fetchApi = async() => {
-//     const api = await fetch('https://rickandmortyapi.com/api/character/'+id)
-//     const data = await api.json()
-//     setCharacterInfo(data)
-
-// }
-// console.log(characterInfo);
-
-// useEffect(()=>{
-//     fetchApi()
-// },[])

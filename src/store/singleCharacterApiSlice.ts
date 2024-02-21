@@ -2,28 +2,41 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { CHARACTER_API_URL } from "../utils/constant";
 import { Character } from "../types/type";
 
-export const fetchSingleCharacter = createAsyncThunk<Character, { id: number }>(
-  "fetch/singleCharacter",
-  async ({ id }, thunkAPI) => {
-    try {
-      const res = await fetch(CHARACTER_API_URL + id);
-      const data = await res.json();
-      return data;
-    } catch (error) {
-      thunkAPI.rejectWithValue("unable to fetch data");
-    }
+export const fetchSingleCharacter = createAsyncThunk<
+  Character,
+  { id: string | undefined }
+>("fetch/singleCharacter", async ({ id }, thunkAPI) => {
+  try {
+    const res = await fetch(CHARACTER_API_URL + id);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    thunkAPI.rejectWithValue("unable to fetch data");
   }
-);
+});
 
 interface StateType {
   loading: boolean;
-  singleCharacter: object;
+  singleCharacter: Character;
   error: null | string;
 }
 
 const initialState: StateType = {
   loading: false,
-  singleCharacter: {},
+  singleCharacter: {
+    created: "",
+    episode: [],
+    gender: "",
+    id: 0,
+    image: "",
+    location: { name: "", url: "" },
+    name: "",
+    origin: { name: "", url: "" },
+    species: "",
+    status: "",
+    type: "",
+    url: "",
+  },
   error: null,
 };
 

@@ -2,14 +2,9 @@ import React from "react";
 
 interface SearchBarProps {
   searchValue: any;
-  onClickFilter: any;
   onChange: any;
 }
-const SearchBar: React.FC<SearchBarProps> = ({
-  searchValue,
-  onClickFilter,
-  onChange,
-}) => {
+const SearchBar: React.FC<SearchBarProps> = ({ searchValue, onChange }) => {
   return (
     <div className="my-6 w-[90%] flex justify-center items-center mx-auto">
       <input
@@ -18,12 +13,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         onChange={onChange}
         placeholder="search....."
       />
-      <button
-        className="m-2 px-5 h-10 rounded-md bg-blue-500"
-        onClick={onClickFilter}
-      >
-        Search
-      </button>
+      <button className="m-2 px-5 h-10 rounded-md bg-blue-500">Search</button>
     </div>
   );
 };

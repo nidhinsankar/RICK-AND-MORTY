@@ -1,5 +1,5 @@
 export interface Character {
-  if: number;
+  id: number;
   name: string;
   status: string;
   species: string;
@@ -11,4 +11,18 @@ export interface Character {
   episode: string[];
   url: string;
   created: string;
+}
+
+export interface LocationListProps {
+  residents: Character[];
+  loading: boolean;
+}
+
+export interface CharacterListProps {
+  characters: Character[];
+  loading: boolean;
+}
+export interface EpisodeListProps {
+  characters: Character[];
+  loading: boolean;
 }

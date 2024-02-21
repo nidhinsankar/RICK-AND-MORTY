@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Filter from "../components/Filter";
 import SearchBar from "../components/SearchBar";
 import { CHARACTER_API_URL } from "../utils/constant";
@@ -6,9 +6,10 @@ import Card from "../components/Card";
 import { filterList } from "../utils/filter";
 import Pagination from "../components/Pagination";
 import ShimmerCard from "../components/ShimmerCard";
-import { useAppDispatch } from "../store/store";
+import { rootState, useAppDispatch } from "../store/store";
 import { fetchCharacter } from "../store/characterAPISlice";
 import { useSelector } from "react-redux";
+import { CharacterListProps } from "../types/type";
 
 const Home = () => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -17,11 +18,13 @@ const Home = () => {
   const [gender, setGender] = useState("");
   const [species, setSpecies] = useState("");
   const dispatch = useAppDispatch();
-  const characterState = useSelector((state) => state.character?.characters);
-  const loading = useSelector((state) => state.character?.loading);
-  const fetchError = useSelector((state) => state.character?.error);
+  const characterState = useSelector(
+    (state: rootState) => state.character?.characters
+  );
+  const loading = useSelector((state: rootState) => state.character?.loading);
+  const fetchError = useSelector((state: rootState) => state.character?.error);
 
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
     // debounce(()=>fetchData())
   };
@@ -60,7 +63,7 @@ const Home = () => {
   );
 };
 
-const Character = ({ characters, loading }) => {
+const Character: React.FC<CharacterListProps> = ({ characters, loading }) => {
   if (loading)
     return (
       <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 md:gap-3 lg:grid-cols-3 ">
@@ -88,15 +91,3 @@ const Character = ({ characters, loading }) => {
 };
 
 export default Home;
-
-// useEffect(()=>{
-//     fetchData()
-// },[pageNumber,status,species,gender])
-
-// useEffect(()=>{
-//     let timer = setTimeout(() => {
-//         console.log('fired after 300');
-//         fetchData()
-//     }, 300);
-//     return () => clearTimeout(timer)
-// },[searchValue,pageNumber,status,species,gender])

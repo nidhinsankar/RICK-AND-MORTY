@@ -38,13 +38,13 @@ export const fetchCharacter = createAsyncThunk<CharacterResult, ParameterType>(
 
 interface InitialStateType {
   loading: boolean;
-  characters: object;
+  characters: CharacterResult;
   error: null | string;
 }
 
 const initialState: InitialStateType = {
   loading: false,
-  characters: {},
+  characters: { info: { count: 0, next: "", pages: 0, prev: "" }, results: [] },
   error: null,
 };
 const characterApiSlice = createSlice({

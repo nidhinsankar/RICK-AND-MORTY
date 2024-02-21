@@ -35,13 +35,24 @@ export const fetchEpisode = createAsyncThunk<
 
 interface InitialStateType {
   loading: boolean;
-  episodes: object;
+  episodes: EpisodeResult;
   error: string | null;
 }
 
 const initialState: InitialStateType = {
   loading: false,
-  episodes: {},
+  episodes: {
+    AllCharacter: [],
+    info: {
+      air_date: "",
+      characters: [],
+      created: "",
+      episode: "",
+      id: 0,
+      name: "",
+      url: "",
+    },
+  },
   error: null,
 };
 

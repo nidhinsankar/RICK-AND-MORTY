@@ -35,13 +35,24 @@ export const fetchLocation = createAsyncThunk<
 
 interface InitialStateType {
   loading: boolean;
-  location: object;
+  location: LocationResult;
   error: string | null;
 }
 
 const initialState: InitialStateType = {
   loading: false,
-  location: {},
+  location: {
+    AllCharacter: [],
+    info: {
+      id: 0,
+      name: "",
+      created: "",
+      dimension: "",
+      residents: [],
+      type: "",
+      url: "",
+    },
+  },
   error: null,
 };
 
