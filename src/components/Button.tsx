@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
 interface ButtonProps {
   name: string;
-  task: any;
-  setPageNumber: any;
-  current: any;
+  task: Dispatch<SetStateAction<string>>;
+  setPageNumber: Dispatch<SetStateAction<number>>;
+  current: string;
 }
 
 const Button: React.FC<ButtonProps> = ({

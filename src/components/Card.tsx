@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 interface CardProps {
-  name: any;
-  image: any;
-  status: any;
-  location: any;
-  id: any;
+  name: string;
+  image: string;
+  status: string;
+  location: { name: string; url: string };
+  id: number;
 }
 const Card: React.FC<CardProps> = ({ name, image, status, location, id }) => {
   return (

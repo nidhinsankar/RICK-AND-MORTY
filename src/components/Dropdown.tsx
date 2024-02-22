@@ -1,9 +1,9 @@
-import React from "react";
+import React, { SetStateAction } from "react";
 
 interface DropdownProps {
-  info: any;
-  updateNumber: any;
-  name: any;
+  info: number;
+  updateNumber: React.Dispatch<SetStateAction<number>>;
+  name: string;
 }
 
 const DropDown: React.FC<DropdownProps> = ({ info, updateNumber, name }) => {
@@ -13,7 +13,7 @@ const DropDown: React.FC<DropdownProps> = ({ info, updateNumber, name }) => {
         className="w-full border-2 border-gray-400 focus:ring-blue-500 focus:border-blue-500 p-1 h-11"
         name="dropdown"
         id="name"
-        onChange={(e) => updateNumber(e.target.value)}
+        onChange={(e) => updateNumber(parseInt(e.target.value))}
       >
         {[...Array(info).keys()].map((x) => (
           <option value={x + 1}>

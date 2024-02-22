@@ -25,3 +25,7 @@
 
 - I need to use rtk query to full extent
 - Adding typescript to a existing react project using parcel bundler
+
+## Task Done
+
+- configured typescript for the project and changed all the files

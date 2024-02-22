@@ -1,8 +1,8 @@
 import React from "react";
 
 interface SearchBarProps {
-  searchValue: any;
-  onChange: any;
+  searchValue: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 const SearchBar: React.FC<SearchBarProps> = ({ searchValue, onChange }) => {
   return (
@@ -13,7 +13,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchValue, onChange }) => {
         onChange={onChange}
         placeholder="search....."
       />
-      <button className="m-2 px-5 h-10 rounded-md bg-blue-500">Search</button>
+      <button className="m-2 px-5 h-10 rounded-md bg-blue-500 text-white">
+        Search
+      </button>
     </div>
   );
 };

@@ -3,60 +3,24 @@ import Button from "./Button";
 import { GENDER, SPECIES, STATUS } from "../utils/constant";
 
 interface AccordionProps {
-  title: any;
-  content: any;
-  isOpen: any;
-  HandleToggle: any;
-  task: any;
-  setPageNumber: any;
-  current: any;
+  title: string;
+  content: string[];
+  isOpen: boolean;
+  HandleToggle: () => void;
+  task: React.Dispatch<React.SetStateAction<string>>;
+  setPageNumber: React.Dispatch<React.SetStateAction<number>>;
+  current: string;
 }
 
 interface FilterProps {
-  setPageNumber: any;
-  setStatus: any;
-  setGender: any;
-  setSpecies: any;
-  status: any;
-  gender: any;
-  species: any;
+  setPageNumber: React.Dispatch<React.SetStateAction<number>>;
+  setStatus: React.Dispatch<React.SetStateAction<string>>;
+  setGender: React.Dispatch<React.SetStateAction<string>>;
+  setSpecies: React.Dispatch<React.SetStateAction<string>>;
+  status: string;
+  gender: string;
+  species: string;
 }
-
-const AccordionTab: React.FC<AccordionProps> = ({
-  title,
-  content,
-  isOpen,
-  HandleToggle,
-  task,
-  setPageNumber,
-  current,
-}) => {
-  return (
-    <>
-      <button
-        onClick={HandleToggle}
-        className="flex items-center justify-between p-5 mb-2 w-full font-medium text-left focus:ring-4 focus:ring-gray-200 bg-gray-100 border border-gray-200 border-b-0"
-      >
-        <h2>{title}</h2>
-        <span>{isOpen !== false ? "close" : "open"}</span>
-      </button>
-      {isOpen && (
-        <div className="p-5 border border-gray-200 border-b-0">
-          <>
-            {content.map((name: string) => (
-              <Button
-                name={name}
-                setPageNumber={setPageNumber}
-                task={task}
-                current={current}
-              />
-            ))}
-          </>
-        </div>
-      )}
-    </>
-  );
-};
 
 const Filter: React.FC<FilterProps> = ({
   setPageNumber,
@@ -122,6 +86,42 @@ const Filter: React.FC<FilterProps> = ({
         key={"Gender"}
       />
     </div>
+  );
+};
+
+const AccordionTab: React.FC<AccordionProps> = ({
+  title,
+  content,
+  isOpen,
+  HandleToggle,
+  task,
+  setPageNumber,
+  current,
+}) => {
+  return (
+    <>
+      <button
+        onClick={HandleToggle}
+        className="flex items-center justify-between p-5 mb-2 w-full font-medium text-left focus:ring-4 focus:ring-gray-200 bg-gray-100 border border-gray-200 border-b-0"
+      >
+        <h2>{title}</h2>
+        <span>{isOpen !== false ? "close" : "open"}</span>
+      </button>
+      {isOpen && (
+        <div className="p-5 border border-gray-200 border-b-0">
+          <>
+            {content.map((name: string) => (
+              <Button
+                name={name}
+                setPageNumber={setPageNumber}
+                task={task}
+                current={current}
+              />
+            ))}
+          </>
+        </div>
+      )}
+    </>
   );
 };
 

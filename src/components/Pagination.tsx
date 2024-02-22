@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
+import { ResultInfo } from "../types/type";
 
 interface PaginationProps {
-  info: any;
-  pageNumber: any;
-  setPageNumber: any;
+  info: ResultInfo;
+  pageNumber: number;
+  setPageNumber: Dispatch<SetStateAction<number>>;
 }
 
 const Pagination: React.FC<PaginationProps> = ({

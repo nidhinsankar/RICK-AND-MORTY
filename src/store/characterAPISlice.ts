@@ -1,16 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { CHARACTER_API_URL } from "../utils/constant";
-import { Character } from "../types/type";
-
-interface CharacterResult {
-  info: {
-    count: number;
-    pages: number;
-    next: null | string;
-    prev: null | string;
-  };
-  results: Character[];
-}
+import { CharacterResult } from "../types/type";
 
 interface ParameterType {
   pageNumber: number;

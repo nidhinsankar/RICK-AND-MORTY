@@ -13,6 +13,17 @@ export interface Character {
   created: string;
 }
 
+export interface ResultInfo {
+  count: number;
+  pages: number;
+  next: null | string;
+  prev: null | string;
+}
+export interface CharacterResult {
+  info: ResultInfo;
+  results: Character[];
+}
+
 export interface LocationListProps {
   residents: Character[];
   loading: boolean;
