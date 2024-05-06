@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 interface CardProps {
   name: string;
   image: string;
